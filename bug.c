@@ -31,7 +31,7 @@ void do_test() {
       if(works == fails) {
           printf("Test passed\n");
       } else {
-          printf("Test failed, works=%d; fails=%d\n", works, fails);
+          printf("Test failed, works=%d; fails=%d\n", (int)works, (int)fails);
       }
   }
 }
