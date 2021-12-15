@@ -150,6 +150,6 @@ jobs:
         uname -a
         gcc ../cpython-ro-srcdir/bug_mktime4.c -o bug_mktime4
         ./bug_mktime4
-        ${{ env.CPYTHON_BUILDDIR }}/python mktime_bug.py
+        ${{ env.CPYTHON_BUILDDIR }}/python ../cpython-ro-srcdir/mktime_bug.py
         xvfb-run make buildbottest TESTOPTS="-j4 -uall,-cpu test_time"
 
