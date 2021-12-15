@@ -4,13 +4,8 @@ name: Tests
 # it prevents to mark a job as mandatory. A PR cannot be merged if a job is
 # mandatory but not scheduled because of "paths-ignore".
 on:
-  workflow_dispatch:
   push:
-    branches:
-    - '3.9'
   pull_request:
-    branches:
-    - '3.9'
 
 jobs:
   check_source:
