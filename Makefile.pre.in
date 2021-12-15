@@ -1702,6 +1702,8 @@ buildbottest:	build_all platform
 		-@if which pybuildbot.identify >/dev/null 2>&1; then \
 			pybuildbot.identify "CC='$(CC)'" "CXX='$(CXX)'"; \
 		fi
+		LIBC=ldd ~/miniconda3/envs/qiita/bin/python | grep libc | cut -f 3 -d " "
+		nm $(LIBC) | grep mktime
 		$(TESTRUNNER) -j 1 -u all -W --slowest --fail-env-changed --timeout=$(TESTTIMEOUT) $(TESTOPTS)
 
 pythoninfo: build_all

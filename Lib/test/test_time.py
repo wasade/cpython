@@ -451,6 +451,7 @@ class TimeTestCase(unittest.TestCase):
         #time.mktime((2017,5,26,15,30,16,5,146,1))  # does not work; 26may2017 is a friday, so day of week should be 5
         #time.mktime((2017,5,26,15,30,16,4,146,1))  # suggestion from pytz was off by one here
 
+        # we fail whenever dst=1
         for i in range(7):
             try:
                 time.mktime((2017,5,26,15,30,16,i,146,-1))
