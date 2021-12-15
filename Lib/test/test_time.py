@@ -438,7 +438,8 @@ class TimeTestCase(unittest.TestCase):
     def test_mktime_overflow(self):
         # bpo-44413
         import datetime
-        print(datetime.datetime(2017,5,26,15,30,16).timetuple())
+        print(datetime.datetime(2017,5,26,15,30,16).timetuple(), flush=True)
+        time.mktime((2017,5,26,15,30,16,5,146,-1))
         time.mktime((2017,5,26,15,30,16,5,146,1))
         time.mktime((2017,5,26,15,30,16,4,146,1))
 
