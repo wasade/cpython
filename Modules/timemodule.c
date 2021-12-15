@@ -1010,6 +1010,7 @@ time_mktime(PyObject *self, PyObject *tm_tuple)
         /* bpo-19748: On AIX, mktime() does not report overflow error
            for timestamp < -2^31 or timestamp > 2**31-1. VxWorks has the
            same issue when working in 32 bit mode. */
+        printf("FAILING: %d %d %d %d %d %d %d %d %d\n", tm.tm_year, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, tm.tm_wday, tm.tm_yday, tm.tm_isdst);
         PyErr_SetString(PyExc_OverflowError,
                         "mktime argument out of range");
         return NULL;
