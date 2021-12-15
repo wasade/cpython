@@ -2,8 +2,8 @@ import ctypes
 import sys
 dst = int(sys.argv[1])
 
-#mktime = ctypes.CDLL('libc.so.6').mktime
-mktime = ctypes.CDLL('libc.dylib').mktime
+mktime = ctypes.CDLL('libc.so.6').mktime
+#mktime = ctypes.CDLL('libc.dylib').mktime
 
 # https://stackoverflow.com/a/46982702
 class TimeStruct(ctypes.Structure):
