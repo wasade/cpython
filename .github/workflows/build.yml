@@ -145,5 +145,9 @@ jobs:
         echo ${{ env.CPYTHON_BUILDDIR }}
         ls ${{ env.CPYTHON_BUILDDIR }}
         nm -D $(ldd ${{ env.CPYTHON_BUILDDIR }}/python | grep libc | cut -f 3 -d " ") | grep mktime   
+        ldd --version
+        uname -a
+        gcc bug_mktime4.c -o bug_mktime4
+        ./bug_mktime4
         xvfb-run make buildbottest TESTOPTS="-j4 -uall,-cpu test_time"
 
