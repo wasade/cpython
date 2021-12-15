@@ -1000,6 +1000,7 @@ time_mktime(PyObject *self, PyObject *tm_tuple)
     {
         return NULL;
     }
+    printf("%d %d %d %d %d %d %d %d %d\n", tm.tm_year, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, tm.tm_wday, tm.tm_yday, tm.tm_isdst);
 
 #if defined(_AIX) || (defined(__VXWORKS__) && !defined(_WRS_CONFIG_LP64))
     /* bpo-19748: AIX mktime() valid range is 00:00:00 UTC, January 1, 1970
