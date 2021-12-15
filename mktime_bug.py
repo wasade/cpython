@@ -1,6 +1,9 @@
 import ctypes
+import sys
+dst = int(sys.argv[1])
 
-mktime = ctypes.CDLL('libc.so.6').mktime
+#mktime = ctypes.CDLL('libc.so.6').mktime
+mktime = ctypes.CDLL('libc.dylib').mktime
 
 # https://stackoverflow.com/a/46982702
 class TimeStruct(ctypes.Structure):
@@ -16,14 +19,9 @@ class TimeStruct(ctypes.Structure):
         ("tm_isdst", ctypes.c_int),
     ]
 
-mktime.argtypes = [ctypes.POINTER(TimeStruct), ]
+mktime.argtypes = [ctypes.POINTER(TimeStruct)]
 mktime.restype = ctypes.c_int
 
-for isdst in (-1, 0, 1):
-    tm = TimeStruct(tm_year=2017, tm_mon=5, tm_mday=21, tm_hour=15, tm_min=30, tm_sec=16, tm_wday=6, tm_yday=141, tm_isdst=isdst)
-    print(tm._objects)
-    res = mktime(tm)
-    print(tm._objects)
-    print(f"tm_isdst={isdst} mktime -> {res}", flush=True)
-
-print("done", flush=True)
+tm = TimeStruct(tm_year=2017, tm_mon=5, tm_mday=21, tm_hour=15, tm_min=30, tm_sec=16, tm_wday=6, tm_yday=141, tm_isdst=dst)
+res = mktime(tm)
+print(f"tm_isdst={dst} mktime -> {res}", flush=True)
