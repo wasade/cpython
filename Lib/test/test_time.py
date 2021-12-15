@@ -438,6 +438,8 @@ class TimeTestCase(unittest.TestCase):
     def test_mktime_overflow(self):
         # bpo-44413
         import datetime
+        print("", flush=True)
+        print(datetime.__file__, flush=True)
         print("sun", datetime.datetime(2017,5,21,15,30,16).timetuple(), flush=True)
         print("mon", datetime.datetime(2017,5,22,15,30,16).timetuple(), flush=True)
         print("tues", datetime.datetime(2017,5,23,15,30,16).timetuple(), flush=True)
@@ -445,9 +447,32 @@ class TimeTestCase(unittest.TestCase):
         print("thurs", datetime.datetime(2017,5,25,15,30,16).timetuple(), flush=True)
         print("fri", datetime.datetime(2017,5,26,15,30,16).timetuple(), flush=True)
         print("sat", datetime.datetime(2017,5,27,15,30,16).timetuple(), flush=True)
-        time.mktime((2017,5,26,15,30,16,5,146,-1))
-        time.mktime((2017,5,26,15,30,16,5,146,1))
-        time.mktime((2017,5,26,15,30,16,4,146,1))
+        time.mktime((2017,5,26,15,30,16,5,146,-1)) # works
+        #time.mktime((2017,5,26,15,30,16,5,146,1))  # does not work; 26may2017 is a friday, so day of week should be 5
+        #time.mktime((2017,5,26,15,30,16,4,146,1))  # suggestion from pytz was off by one here
+
+        for i in range(7):
+            try:
+                time.mktime((2017,5,26,15,30,16,i,146,-1))
+            except:
+                print("dst -1; %d failed" % i, flush=True)
+            else:
+                print("dst -1; %d succeeded" % i, flush=True)
+
+            try:
+                time.mktime((2017,5,26,15,30,16,i,146,0))
+            except:
+                print("dst 0; %d failed" % i, flush=True)
+            else:
+                print("dst 0; %d succeeded" % i, flush=True)
+
+            try:
+                time.mktime((2017,5,26,15,30,16,i,146,1))
+            except:
+                print("dst 1; %d failed" % i, flush=True)
+            else:
+                print("dst 1; %d succeeded" % i, flush=True)
+        self.fail()
 
     ## Issue #13309: passing extreme values to mktime() or localtime()
     ## borks the glibc's internal timezone data.
