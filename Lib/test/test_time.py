@@ -437,6 +437,8 @@ class TimeTestCase(unittest.TestCase):
 
     def test_mktime_overflow(self):
         # bpo-44413
+        import datetime
+        time.mktime(datetime.datetime(2017,5,26,15,30,16).timetuple())
         time.mktime((2017,5,26,15,30,16,4,146,1))
 
     ## Issue #13309: passing extreme values to mktime() or localtime()

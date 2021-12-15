@@ -156,6 +156,7 @@ _DAYNAMES = [None, "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 def _build_struct_time(y, m, d, hh, mm, ss, dstflag):
     wday = (_ymd2ord(y, m, d) + 6) % 7
     dnum = _days_before_month(y, m) + d
+    print("build_struct_time", y, m, d, _ymd2ord(y, m, d), wday, dnum)
     return _time.struct_time((y, m, d, hh, mm, ss, wday, dnum, dstflag))
 
 def _format_time(hh, mm, ss, us, timespec='auto'):
@@ -1751,6 +1752,7 @@ class datetime(date):
             dst = 1
         else:
             dst = 0
+        print("timetuple", self.year, self.month, self.day, self.hour, self.minute, self.second, dst)
         return _build_struct_time(self.year, self.month, self.day,
                                   self.hour, self.minute, self.second,
                                   dst)
