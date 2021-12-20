@@ -1,7 +1,7 @@
 #include <time.h>
 #include <stdio.h>
 
-void do_test() {
+int do_test() {
   struct tm tm_works = { .tm_year=117,
                          .tm_mon=4,
                          .tm_mday=26,
@@ -32,11 +32,13 @@ void do_test() {
           printf("Test passed\n");
       } else {
           printf("Test failed: works=%d; fails=%d\n", (int)works, (int)fails);
+          return 1;
       }
   }
+  return 0;
 }
 
 
 int main(int argc, char **argv) {
-    do_test();
+    return do_test();
 }
