@@ -148,6 +148,8 @@ jobs:
         ldd ${{ env.CPYTHON_BUILDDIR }}/python
         ldd --version
         uname -a
+        cat /etc/timezone
+        timedatectl
         gcc ../cpython-ro-srcdir/bug.c -o bug
         ./bug
         #${{ env.CPYTHON_BUILDDIR }}/python -X tracemalloc=5 ../cpython-ro-srcdir/mktime_bug.py 1
