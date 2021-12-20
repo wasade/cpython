@@ -150,6 +150,7 @@ jobs:
         uname -a
         cat /etc/timezone
         timedatectl
+        python -c "import datetime; print(datetime.datetime.now().astimezone().tzname())"
         #sudo timedatectl set-timezone America/Los_Angeles
         #timedatectl
         gcc ../cpython-ro-srcdir/bug.c -o bug
