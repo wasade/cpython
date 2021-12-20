@@ -143,9 +143,9 @@ jobs:
       working-directory: ${{ env.CPYTHON_BUILDDIR }}
       run: |
         echo ${{ env.CPYTHON_BUILDDIR }}
-        ls ${{ env.CPYTHON_BUILDDIR }}
+        #ls ${{ env.CPYTHON_BUILDDIR }}
         #nm -D $(ldd ${{ env.CPYTHON_BUILDDIR }}/python | grep libc | cut -f 3 -d " ") | grep mktime   
-        ldd ${{ env.CPYTHON_BUILDDIR }}/python
+        #ldd ${{ env.CPYTHON_BUILDDIR }}/python
         ldd --version
         uname -a
         cat /etc/timezone
