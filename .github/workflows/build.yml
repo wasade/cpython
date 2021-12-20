@@ -127,15 +127,15 @@ jobs:
       run: mkdir -p $CPYTHON_RO_SRCDIR $CPYTHON_BUILDDIR
     - name: Bind mount sources read-only
       run: sudo mount --bind -o ro $GITHUB_WORKSPACE $CPYTHON_RO_SRCDIR
-        #- name: Configure CPython out-of-tree
-        #  working-directory: ${{ env.CPYTHON_BUILDDIR }}
-        #  run: ../cpython-ro-srcdir/configure --with-pydebug --with-openssl=$OPENSSL_DIR
-        #- name: Build CPython out-of-tree
-        #  working-directory: ${{ env.CPYTHON_BUILDDIR }}
-        #  run: make -j4
-        #- name: Display build info
-        #  working-directory: ${{ env.CPYTHON_BUILDDIR }}
-        #  run: make pythoninfo
+    - name: Configure CPython out-of-tree
+      working-directory: ${{ env.CPYTHON_BUILDDIR }}
+      run: ../cpython-ro-srcdir/configure --with-pydebug --with-openssl=$OPENSSL_DIR
+    - name: Build CPython out-of-tree
+      working-directory: ${{ env.CPYTHON_BUILDDIR }}
+      run: make -j4
+    - name: Display build info
+      working-directory: ${{ env.CPYTHON_BUILDDIR }}
+      run: make pythoninfo
     - name: Remount sources writable for tests
       # some tests write to srcdir, lack of pyc files slows down testing
       run: sudo mount $CPYTHON_RO_SRCDIR -oremount,rw
@@ -150,7 +150,7 @@ jobs:
         uname -a
         cat /etc/timezone
         timedatectl
-        python -c "import datetime; print(datetime.datetime.now().astimezone().tzname())"
+        ${{ env.CPYTHON_BUILDDIR }}/python -c "import datetime; print(datetime.datetime.now().astimezone().tzname())"
         #sudo timedatectl set-timezone America/Los_Angeles
         #timedatectl
         gcc ../cpython-ro-srcdir/bug.c -o bug
